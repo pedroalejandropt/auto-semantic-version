@@ -16,7 +16,7 @@ export class GitCommandService implements IGitCommandService {
     }
 
     async getLastCommit() : Promise<Commit> {
-        let line = 'git log -1 --pretty=format:"&$& %H ||| %s"'
+        let line = 'git log -1 --pretty=format:"%H ||| %s"'
         let [hash, msg] = (await cmd(line)).split('|||');
         return new Commit(hash, msg)
     }
@@ -29,7 +29,7 @@ export class GitCommandService implements IGitCommandService {
     }
 
     async getLastTag() : Promise<Tag> {
-        let line = 'git tag -l -1 --pretty=format:"&$& %H ||| %s"';
+        let line = 'git tag -l -1 --pretty=format:"%H ||| %s"';
         let output = (await cmd(line)).split('|||');
         return new Tag();
     }
