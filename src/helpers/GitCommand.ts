@@ -2,8 +2,9 @@ import { cmd } from './ExecCommand'
 
 export const getCommits = async () => {
     let line = 'git log --pretty=format:"%H %s |"'
-    let output = (await cmd(line));
-    console.log('COMMITS ' + output);
+    let output = (await cmd(line)).split('|');
+    output.forEach((x) => console.log('COMMITS ' + x));
+    
 }
 
 export const getTags = async () => {
