@@ -35,6 +35,7 @@ class GitCommandService {
             label = result;
         }
         console.log(label);
+        console.log(result);
         return new Tag_1.Tag(label);
     }
 }
