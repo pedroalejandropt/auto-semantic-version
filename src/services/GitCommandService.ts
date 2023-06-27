@@ -32,12 +32,15 @@ export class GitCommandService implements IGitCommandService {
         let line = (release) ? 
             `git tag --list "*release*" --format='%(refname:short)' | sed '$!s/$/|||/'` : 
             `git tag --list --format='%(refname:short)' | sed '$!s/$/|||/'` ;
+        console.log(line);
+
         let result = (await cmd(line));
         let label = (await cmd(line)).split('|||').pop();
         if (!label) {
             label = result
         }
         console.log(label);
+        console.log(typeof label);
         console.log(result);
         
         return new Tag(label);
