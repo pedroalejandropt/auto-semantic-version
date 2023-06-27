@@ -1,7 +1,7 @@
 import { cmd } from './ExecCommand'
 
 export const getCommits = async () => {
-    let line = 'git log --pretty=oneline';
+    let line = 'git log --pretty=format:"%H %s |"'
     let output = (await cmd(line));
     console.log('COMMITS ' + output);
 }
