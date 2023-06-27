@@ -30,13 +30,13 @@ export class GitCommandService implements IGitCommandService {
 
     async getLastTag(release: boolean = false) : Promise<Tag> {
         let line = (release) ? 
-            'git tag --list "*release*" --format="%(refname:short)" | sed "$!s/$/|||/"' : 
-            'git tag --list --format="%(refname:short)" | sed "$!s/$/|||/"' ;
+            'git tag -l "*release*"' : 
+            'git tag -l' ;
         console.log(line);
         
         let result = (await cmd(line));
         console.log(result);
-        let label = result.split('|||').pop();
+        let label = result.split('\n').pop();
         if (label == '') {
             label = result
         }

@@ -27,12 +27,12 @@ class GitCommandService {
     }
     async getLastTag(release = false) {
         let line = (release) ?
-            'git tag --list "*release*" --format="%(refname:short)" | sed "$!s/$/|||/"' :
-            'git tag --list --format="%(refname:short)" | sed "$!s/$/|||/"';
+            'git tag -l "*release*"' :
+            'git tag -l';
         console.log(line);
         let result = (await (0, ExecCommand_1.cmd)(line));
         console.log(result);
-        let label = result.split('|||').pop();
+        let label = result.split('\n').pop();
         if (label == '') {
             label = result;
         }
