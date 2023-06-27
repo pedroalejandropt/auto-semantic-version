@@ -15,7 +15,7 @@ class GitCommandService {
         return commits;
     }
     async getLastCommit() {
-        let line = 'git log -1 --pretty=format:"&$& %H ||| %s"';
+        let line = 'git log -1 --pretty=format:"%H ||| %s"';
         let [hash, msg] = (await (0, ExecCommand_1.cmd)(line)).split('|||');
         return new Commit_1.Commit(hash, msg);
     }
@@ -26,7 +26,7 @@ class GitCommandService {
         return tags;
     }
     async getLastTag() {
-        let line = 'git tag -l -1 --pretty=format:"&$& %H ||| %s"';
+        let line = 'git tag -l -1 --pretty=format:"%H ||| %s"';
         let output = (await (0, ExecCommand_1.cmd)(line)).split('|||');
         return new Tag_1.Tag();
     }
