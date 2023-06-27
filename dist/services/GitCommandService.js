@@ -29,7 +29,11 @@ class GitCommandService {
         let line = (release) ?
             `git tag --list "*release*" --format='%(refname:short)' | sed '$!s/$/|||/'` :
             `git tag --list --format='%(refname:short)' | sed '$!s/$/|||/'`;
+        let result = (await (0, ExecCommand_1.cmd)(line));
         let label = (await (0, ExecCommand_1.cmd)(line)).split('|||').pop();
+        if (!label) {
+            label = result;
+        }
         console.log(label);
         return new Tag_1.Tag(label);
     }
