@@ -1,13 +1,13 @@
 const core = require('@actions/core');
-import { getCommits, getTags } from "./helpers/GitCommand";
+import { GitCommandService } from "./services/GitCommandService";
 
 async function run() {
   try {
-    getCommits();
-    getTags();
+    let gitService = new GitCommandService();
+    let commit = await gitService.getLastCommit();
 
     core.setOutput('previousTags', '');
-    core.setOutput('lastCommit', '');
+    core.setOutput('lastCommit', `${commit.Hash} - ${commit.Msg}`);
   } catch (error) {
     core.setFailed(error.message);
   }

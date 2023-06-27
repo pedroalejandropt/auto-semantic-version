@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = require('@actions/core');
-const GitCommand_1 = require("./helpers/GitCommand");
+const GitCommandService_1 = require("./services/GitCommandService");
 async function run() {
     try {
-        (0, GitCommand_1.getCommits)();
-        (0, GitCommand_1.getTags)();
+        let gitService = new GitCommandService_1.GitCommandService();
+        let commit = await gitService.getLastCommit();
         core.setOutput('previousTags', '');
-        core.setOutput('lastCommit', '');
+        core.setOutput('lastCommit', `${commit.Hash} - ${commit.Msg}`);
     }
     catch (error) {
         core.setFailed(error.message);
