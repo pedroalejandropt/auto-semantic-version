@@ -13,8 +13,10 @@ const cmd = async (command: string, ...args: any) => {
             silent: true
         }
     };
-
+    
     await exec.exec(command, args, options);
+    console.log(results);
+    console.log(errors);
     
     return results;
 }
