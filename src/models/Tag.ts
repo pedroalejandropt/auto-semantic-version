@@ -1,4 +1,13 @@
 export class Tag {
-    // Under construnction
-    constructor() {}
+
+    constructor(
+        label: string
+    ) 
+    {
+        this.Label = label;
+    }
+
+    Label: string;
+    
+    IsRelease = () => this.Label.toLowerCase().includes('release');
 }

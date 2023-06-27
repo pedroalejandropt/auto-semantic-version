@@ -5,5 +5,5 @@ export interface IGitCommandService {
     getCommits() : Promise<Commit[]> ;
     getLastCommit() : Promise<Commit> ;
     getTags() : Promise<Tag[]> ;
-    getLastTag() : Promise<Tag> ;
+    getLastTag(release: boolean) : Promise<Tag> ;
 }
