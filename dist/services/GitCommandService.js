@@ -30,6 +30,7 @@ class GitCommandService {
             `git tag --list "*release*" --format='%(refname:short)' | sed '$!s/$/|||/'` :
             `git tag --list --format='%(refname:short)' | sed '$!s/$/|||/'`;
         let label = (await (0, ExecCommand_1.cmd)(line)).split('|||').pop();
+        console.log(label);
         return new Tag_1.Tag(label);
     }
 }

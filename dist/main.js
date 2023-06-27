@@ -7,6 +7,7 @@ async function run() {
         let gitService = new GitCommandService_1.GitCommandService();
         let commit = await gitService.getLastCommit();
         let tag = await gitService.getLastTag();
+        console.log(tag);
         core.setOutput('lastTag', tag.Label);
         core.setOutput('lastCommit', `${commit.Hash} - ${commit.Msg}`);
     }
