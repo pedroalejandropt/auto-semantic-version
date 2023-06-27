@@ -25,7 +25,7 @@ class GitCommandService {
         let tags = output.map((label) => new Tag_1.Tag(label));
         return tags;
     }
-    async getLastTag(release) {
+    async getLastTag(release = false) {
         let line = (release) ?
             `git tag --list "*release*" --format='%(refname:short)' | sed '$!s/$/|||/'` :
             `git tag --list --format='%(refname:short)' | sed '$!s/$/|||/'`;
