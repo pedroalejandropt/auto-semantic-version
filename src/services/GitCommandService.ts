@@ -38,6 +38,7 @@ export class GitCommandService implements IGitCommandService {
             label = result
         }
         console.log(label);
+        console.log(result);
         
         return new Tag(label);
     }
