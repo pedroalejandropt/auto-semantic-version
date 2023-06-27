@@ -1,7 +1,5 @@
 export class Commit {
-    Hash: string;
-    Msg: string;
-
+    
     constructor(
         hash: string,
         msg: string
@@ -10,4 +8,10 @@ export class Commit {
         this.Hash = hash;
         this.Msg = msg;
     }
+
+    Hash: string;
+    Msg: string;
+    
+    IsMajor = () : boolean => this.Msg.toLowerCase().includes('major');
+    IsMinor = () : boolean => this.Msg.toLowerCase().includes('minor');
 }
