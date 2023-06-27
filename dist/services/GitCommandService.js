@@ -26,13 +26,15 @@ class GitCommandService {
         return tags;
     }
     async getLastTag(release = false) {
+        let label = '';
         let line = (release) ?
             'git tag -l "*release*"' :
             'git tag -l';
-        let label = (await (0, ExecCommand_1.cmd)(line)).split('\n').pop();
-        console.log((await (0, ExecCommand_1.cmd)(line)).split('\n'));
-        console.log(label);
-        console.log(typeof label);
+        let tags = (await (0, ExecCommand_1.cmd)(line)).split('\n');
+        if (tags.length > 0) {
+            tags.pop();
+            label = tags.pop();
+        }
         return new Tag_1.Tag(label);
     }
 }

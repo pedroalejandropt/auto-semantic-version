@@ -29,15 +29,16 @@ export class GitCommandService implements IGitCommandService {
     }
 
     async getLastTag(release: boolean = false) : Promise<Tag> {
+        let label = '';
         let line = (release) ? 
             'git tag -l "*release*"' : 
             'git tag -l' ;
         
-        let label = (await cmd(line)).split('\n').pop();
-        console.log((await cmd(line)).split('\n'));
-        
-        console.log(label);
-        console.log(typeof label);
+        let tags = (await cmd(line)).split('\n');
+        if (tags.length > 0){
+            tags.pop();
+            label = tags.pop();
+        }
         
         return new Tag(label);
     }
