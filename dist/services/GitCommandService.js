@@ -29,13 +29,8 @@ class GitCommandService {
         let line = (release) ?
             'git tag -l "*release*"' :
             'git tag -l';
-        console.log(line);
-        let result = (await (0, ExecCommand_1.cmd)(line));
-        console.log(result);
-        let label = result.split('\n').pop();
-        if (label == '') {
-            label = result;
-        }
+        let label = (await (0, ExecCommand_1.cmd)(line)).split('\n').pop();
+        console.log((await (0, ExecCommand_1.cmd)(line)).split('\n'));
         console.log(label);
         console.log(typeof label);
         return new Tag_1.Tag(label);

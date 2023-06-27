@@ -32,14 +32,10 @@ export class GitCommandService implements IGitCommandService {
         let line = (release) ? 
             'git tag -l "*release*"' : 
             'git tag -l' ;
-        console.log(line);
         
-        let result = (await cmd(line));
-        console.log(result);
-        let label = result.split('\n').pop();
-        if (label == '') {
-            label = result
-        }
+        let label = (await cmd(line)).split('\n').pop();
+        console.log((await cmd(line)).split('\n'));
+        
         console.log(label);
         console.log(typeof label);
         

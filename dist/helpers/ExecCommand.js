@@ -15,8 +15,6 @@ const cmd = async (command, ...args) => {
         }
     };
     await exec.exec(command, args, options);
-    console.log(results);
-    console.log(errors);
     return results;
 };
 exports.cmd = cmd;
