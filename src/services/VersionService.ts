@@ -33,7 +33,7 @@ export class VersionService implements IVersionService {
                 patch = 0;
                 break;
             default:
-                patch += 1
+                patch += 1;
                 break;
         }
 

@@ -36,7 +36,7 @@ class GitCommandService {
                 `git tag -l "*[0-9]-${release}"` :
                 (namespace) ?
                     `git tag -l "*[0-9]-${namespace}"` :
-                    'git tag -l';
+                    'git tag -l "*[0-9]"';
         let tags = (await (0, ExecCommand_1.cmd)(line)).split('\n');
         if (tags.length > 1) {
             tags.pop();
