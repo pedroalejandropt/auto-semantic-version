@@ -1,3 +1,4 @@
+const core = require('@actions/core');
 export class Version {
 
     constructor(
@@ -15,5 +16,18 @@ export class Version {
     Minor: number;
     Patch: number;
     
-    get = () : string => `v${this.Major}.${this.Minor}.${this.Patch}`
+    get = () : string => {
+        const release = core.getInput('release');
+        const namespace = core.getInput('namespace');
+
+        let label = `v${this.Major}.${this.Minor}.${this.Patch}`
+        
+        if (namespace)
+            label = `${label}-${namespace}`;
+
+        if (release) 
+            label = `${label}-${release}`;
+
+        return label;
+    }
 }

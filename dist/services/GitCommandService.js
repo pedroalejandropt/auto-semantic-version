@@ -42,6 +42,9 @@ class GitCommandService {
             tags.pop();
             label = tags.pop();
         }
+        else {
+            label = 'v0.0.0';
+        }
         return new Tag_1.Tag(label);
     }
 }
