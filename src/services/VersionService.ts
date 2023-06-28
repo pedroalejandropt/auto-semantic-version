@@ -13,21 +13,21 @@ export class VersionService implements IVersionService {
     
     async buildVersion() : Promise<Version> {
         let tag = await this._gitCommandService.getLastTag();
-        let newVersion = this.increaseVersion(tag);
+        let newVersion = await this.increaseVersion(tag);
         
         return newVersion;
     }
 
-    increaseVersion = (tag: Tag) : Version => {
-        let commitType = ''
+    increaseVersion = async (tag: Tag) : Promise<Version> => {
+        let commit = (await this._gitCommandService.getLastCommit()).getType();
         let [major, minor, patch] =  tag.destructureTag(); 
 
-        switch (commitType) {
+        switch (commit) {
             case 'major':
-                major += 1
+                major += 1, minor = 0, patch = 0
                 break;
             case 'minor':
-                minor += 1
+                minor += 1, patch = 0
             default:
                 patch += 1
                 break;
