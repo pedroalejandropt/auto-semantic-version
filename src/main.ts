@@ -1,14 +1,11 @@
 const core = require('@actions/core');
-import { GitCommandService } from "./services/GitCommandService";
+import { VersionService } from "./services/VersionService";
 
 async function run() {
   try {
-    let gitService = new GitCommandService();
-    let commit = await gitService.getLastCommit();
-    let tag = await gitService.getLastTag();
-
-    core.setOutput('lastTag', tag.Label);
-    core.setOutput('lastCommit', `${commit.Hash} - ${commit.Msg}`);
+    let versionService = new VersionService();
+    let version = await versionService.buildVersion();
+    core.setOutput('version', version.get());
   } catch (error) {
     core.setFailed(error.message);
   }

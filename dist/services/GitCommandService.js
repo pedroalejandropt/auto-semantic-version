@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GitCommandService = void 0;
-const ExecCommand_1 = require("../helpers/ExecCommand");
-const Commit_1 = require("../models/Commit");
 const Tag_1 = require("../models/Tag");
+const Commit_1 = require("../models/Commit");
+const ExecCommand_1 = require("../helpers/ExecCommand");
+const core = require('@actions/core');
 class GitCommandService {
     async getCommits() {
         let line = 'git log --pretty=format:"&$& %H ||| %s"';
@@ -25,15 +26,24 @@ class GitCommandService {
         let tags = output.map((label) => new Tag_1.Tag(label));
         return tags;
     }
-    async getLastTag(release = false) {
+    async getLastTag() {
+        const release = core.getInput('release');
+        const namespace = core.getInput('namespace');
         let label = '';
-        let line = (release) ?
-            'git tag -l "*release*"' :
-            'git tag -l';
+        let line = (release && namespace) ?
+            `git tag -l "*${namespace}-${release}*"` :
+            (release) ?
+                `git tag -l "*[0-9]-${release}"` :
+                (namespace) ?
+                    `git tag -l "*[0-9]-${namespace}"` :
+                    'git tag -l';
         let tags = (await (0, ExecCommand_1.cmd)(line)).split('\n');
-        if (tags.length > 0) {
+        if (tags.length > 1) {
             tags.pop();
             label = tags.pop();
+        }
+        else {
+            label = 'v0.0.0';
         }
         return new Tag_1.Tag(label);
     }
