@@ -15,5 +15,5 @@ export class Version {
     Minor: number;
     Patch: number;
     
-    get = () : string => `${this.Major}.${this.Minor}.${this.Patch}`
+    get = () : string => `v${this.Major}.${this.Minor}.${this.Patch}`
 }

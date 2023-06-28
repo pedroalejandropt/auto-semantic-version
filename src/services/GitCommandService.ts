@@ -1,7 +1,9 @@
-import { cmd } from '../helpers/ExecCommand'
-import { Commit } from '../models/Commit';
 import { Tag } from '../models/Tag';
+import { Commit } from '../models/Commit';
+import { cmd } from '../helpers/ExecCommand'
 import { IGitCommandService } from './IGitCommandService';
+
+const core = require('@actions/core');
 
 export class GitCommandService implements IGitCommandService {
     
@@ -28,10 +30,17 @@ export class GitCommandService implements IGitCommandService {
         return tags;
     }
 
-    async getLastTag(release: boolean = false) : Promise<Tag> {
+    async getLastTag() : Promise<Tag> {
+        const release = core.getInput('release');
+        const namespace = core.getInput('namespace');
         let label = '';
-        let line = (release) ? 
-            'git tag -l "*release*"' : 
+        let line = 
+            (release && namespace) ? 
+                `git tag -l "*${namespace}-${release}*"` : 
+            (release) ?
+                `git tag -l "*${release}*"` : 
+            (namespace) ?
+                `git tag -l "*${namespace}*"` :
             'git tag -l' ;
         
         let tags = (await cmd(line)).split('\n');

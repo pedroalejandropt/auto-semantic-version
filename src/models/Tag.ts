@@ -1,3 +1,5 @@
+const core = require('@actions/core');
+
 export class Tag {
 
     constructor(
@@ -12,6 +14,16 @@ export class Tag {
     isRelease = () => this.Label.toLowerCase().includes('release');
 
     destructureTag = (): number[] => {
-        return this.Label.replace('v', '').split('.').map(x => Number(x));
+        const release = core.getInput('release');
+        const namespace = core.getInput('namespace');
+
+        let label = this.Label.replace('v', '');
+        if (release) 
+            label = label.replace(`-${release}`, '');
+        
+        if (namespace)
+            label = label.replace(`-${namespace}`, '');
+
+        return label.split('.').map(x => Number(x));
     }
 }
