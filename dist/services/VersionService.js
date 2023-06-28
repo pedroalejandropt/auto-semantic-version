@@ -10,10 +10,14 @@ class VersionService {
             let [major, minor, patch] = tag.destructureTag();
             switch (commit) {
                 case 'major':
-                    major += 1, minor = 0, patch = 0;
+                    major += 1;
+                    minor = 0;
+                    patch = 0;
                     break;
                 case 'minor':
-                    minor += 1, patch = 0;
+                    minor += 1;
+                    patch = 0;
+                    break;
                 default:
                     patch += 1;
                     break;
