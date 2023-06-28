@@ -38,6 +38,7 @@ class GitCommandService {
                     `git tag -l "*${namespace}*"` :
                     'git tag -l';
         let tags = (await (0, ExecCommand_1.cmd)(line)).split('\n');
+        console.log(tags);
         if (tags.length > 0) {
             tags.pop();
             label = tags.pop();
