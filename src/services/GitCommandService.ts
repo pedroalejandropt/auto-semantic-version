@@ -38,9 +38,9 @@ export class GitCommandService implements IGitCommandService {
             (release && namespace) ? 
                 `git tag -l "*${namespace}-${release}*"` : 
             (release) ?
-                `git tag -l "*${release}"` : 
+                `git tag -l "*[0-9]-${release}"` : 
             (namespace) ?
-                `git tag -l "*${namespace}"` :
+                `git tag -l "*[0-9]-${namespace}"` :
             'git tag -l' ;
         
         let tags = (await cmd(line)).split('\n');
