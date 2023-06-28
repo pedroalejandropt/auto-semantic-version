@@ -44,10 +44,7 @@ export class GitCommandService implements IGitCommandService {
             'git tag -l' ;
         
         let tags = (await cmd(line)).split('\n');
-        console.log(tags);
-        
-        
-        if (tags.length > 0){
+        if (tags.length > 1){
             tags.pop();
             label = tags.pop();
         } else {
