@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = require('@actions/core');
-const GitCommandService_1 = require("./services/GitCommandService");
+const VersionService_1 = require("./services/VersionService");
 async function run() {
     try {
-        let gitService = new GitCommandService_1.GitCommandService();
-        let commit = await gitService.getLastCommit();
-        let tag = await gitService.getLastTag();
-        core.setOutput('lastTag', tag.Label);
-        core.setOutput('lastCommit', `${commit.Hash} - ${commit.Msg}`);
+        let versionService = new VersionService_1.VersionService();
+        let version = await versionService.buildVersion();
+        console.log(version);
+        console.log(version.get());
+        core.setOutput('version', version.get());
     }
     catch (error) {
         core.setFailed(error.message);

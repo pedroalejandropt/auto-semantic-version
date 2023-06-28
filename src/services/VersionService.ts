@@ -13,6 +13,8 @@ export class VersionService implements IVersionService {
     
     async buildVersion() : Promise<Version> {
         let tag = await this._gitCommandService.getLastTag();
+        console.log(tag.Label);
+        
         let newVersion = this.increaseVersion(tag);
         
         return newVersion;
