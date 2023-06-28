@@ -11,7 +11,8 @@ export class Commit {
 
     Hash: string;
     Msg: string;
-    
-    IsMajor = () : boolean => this.Msg.toLowerCase().includes('major');
-    IsMinor = () : boolean => this.Msg.toLowerCase().includes('minor');
+
+    getType = () : string => this.isMajor() ? 'major' : this.isMinor() ? 'minor' : 'patch';
+    isMajor = () : boolean => this.Msg.toLowerCase().includes('major');
+    isMinor = () : boolean => this.Msg.toLowerCase().includes('minor');
 }
