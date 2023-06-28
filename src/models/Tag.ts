@@ -9,5 +9,9 @@ export class Tag {
 
     Label: string;
     
-    IsRelease = () => this.Label.toLowerCase().includes('release');
+    isRelease = () => this.Label.toLowerCase().includes('release');
+
+    destructureTag = (): number[] => {
+        return this.Label.replace('v', '').split('.').map(x => Number(x));
+    }
 }
