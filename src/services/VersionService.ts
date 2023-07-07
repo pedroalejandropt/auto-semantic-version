@@ -20,6 +20,8 @@ export class VersionService implements IVersionService {
 
     increaseVersion = async (tag: Tag) : Promise<Version> => {
         let commit = (await this._gitCommandService.getLastCommit()).getType();
+        console.log("hey", commit);
+        
         let [major, minor, patch] =  tag.destructureTag(); 
 
         switch (commit) {
