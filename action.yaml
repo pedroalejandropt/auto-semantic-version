@@ -1,13 +1,15 @@
 name: 'Custom Action'
 description: 'Custom GitHub Action'
 inputs:
-  name:
-    description: 'The name input'
-    required: true
-    default: 'World'
+  release:
+    description: 'Label for the release versions'
+    required: false
+  namespace:
+    description: 'Label to specify a namespace'
+    required: false
 outputs:
-  greeting:
-    description: 'The greeting output'
+  version:
+    description: 'The Version Generated'
 runs:
   using: 'node12'
   main: 'dist/main.js'
