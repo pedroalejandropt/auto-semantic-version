@@ -32,7 +32,6 @@ describe('GitCommandService', () => {
       ];
 
       const commits = await gitCommandService.getCommits();
-      console.log(commits);
       
       expect(commits.length).toEqual(expectedCommits.length);
       expect(cmd).toHaveBeenCalledWith('git log --pretty=format:"&$& %H|||%s"');
