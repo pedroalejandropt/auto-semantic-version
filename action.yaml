@@ -1,5 +1,5 @@
-name: 'Custom Action'
-description: 'Custom GitHub Action'
+name: 'Auto Semantic Version'
+description: 'Generate a version based on commits and tags information of your repository'
 inputs:
   release:
     description: 'Label for the release versions'
